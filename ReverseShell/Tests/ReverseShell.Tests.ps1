@@ -1,5 +1,5 @@
 Import-Module Pester
-Import-Module ./ReverseShell.psm1
+Import-Module ../Modules/ReverseShell.psm1
 
 # Invoke-Pester -Script ./ReverseShell.Tests.ps1 -PassThru -Output Detailed
 Describe "Start-ReverseShell" {
