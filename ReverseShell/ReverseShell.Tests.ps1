@@ -9,7 +9,7 @@ Describe "Start-ReverseShell" {
             $expectedConfirmation = "Shell Connected: " + (Get-Date).ToString() + "`n"
             $mockClient = [System.Net.Sockets.TCPClient]::new()
             $mockStream = [System.IO.MemoryStream]::new()
-            $mockClient.PSObject.Members.Remove("GetStream")
+
             $mockClient | Add-Member -NotePropertyName "GetStream" -Force -NotePropertyValue { $mockStream }
             $mockStream | Add-Member -NotePropertyName "Write" -NotePropertyValue -Force { param($bytes, $offset, $count) { } }
             $mockStream | Add-Member -NotePropertyName "Read" -NotePropertyValue -Force { param($bytes, $offset, $count) { 0 } }
