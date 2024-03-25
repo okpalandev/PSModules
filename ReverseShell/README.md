@@ -26,7 +26,7 @@ PS C:\> Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser
 
 ## Example
 ```powershell
-PS C:\> Invoke-WebRequest -Uri "https://raw.githubusercontent.com/okpalandev/PSModules/ReverseShell/Modules/ReverseShell.psm1" -OutFile "ReverseShell.psm1"
+PS C:\> Invoke-WebRequest -Uri "https://raw.githubusercontent.com/okpalandev/PSModules/main/ReverseShell/Modules/ReverseShell.psm1" -OutFile "ReverseShell.psm1"
 ```
 
 ```powershell

