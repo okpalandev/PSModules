@@ -58,8 +58,5 @@ In the script, you can use the following command to encode the script.
 @echo off # Don't forget to add the ampersand at the beginning of the command.
 powershell -ExecutionPolicy Bypass -NoLogo -NonInteractive -NoProfile -EncodedCommand "& EncodedCommand"
 ````
-## Changelog
-- 1.0: Initial script
-````
-```
+
 
